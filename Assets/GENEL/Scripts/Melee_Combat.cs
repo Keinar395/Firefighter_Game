@@ -2,38 +2,64 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Melee_Combat : MonoBehaviour
+public class MeleeCombat : MonoBehaviour
 {
     private Animator animator;
     private bool hasDrawn = false;
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayers;
+    public int attackDamage = 40;
+
     void Start()
     {
         animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        HandleSwordDraw();
+        HandleAttack();
+    }
 
-        //kýlýcý çekmek için f ye bas!
+    
+    private void HandleSwordDraw()
+    {
         if (Input.GetKeyDown(KeyCode.F) && !hasDrawn)
         {
-            animator.SetTrigger("DrawSwordTrigger");
+            Debug.Log("F tuþuna basýldý, kýlýç çekiliyor...");
+            animator.SetBool("HasDrawn", true);
             hasDrawn = true;
-            //k ye basarsan basit vuruþ yapar 
-
-            if (Input.GetKeyUp(KeyCode.K))
-            {
-                Attack();
-            }
         }
     }
-    public void ResetDraw()
+
+  
+    private void HandleAttack()
     {
-        hasDrawn = false;
+        if (hasDrawn && Input.GetKeyDown(KeyCode.K))
+        {
+            Attack();
+        }
     }
-    void Attack()
+
+    private void Attack()
     {
-        //düþmanlarý tespit et
+        // Placeholder for attack logic (e.g., detecting and damaging enemies).
+        Debug.Log("Performed attack!");
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers); ;
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+        }
+
+    }
+    void OnDrawGizmosSelected()
+    {
+        if(attackPoint == null)
+        {
+            return;
+        }
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
