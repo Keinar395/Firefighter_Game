@@ -79,16 +79,18 @@ public class Movement : MonoBehaviour
     }
 
 
-    //yönünü deðiþtiriyoruz (test edilmedi)
+    //yönünü deðiþtiriyoruz (test edilmedi) (test edildi istenen sonucu vermedi düzeltildi)
     private void Flip()
     {
-        if (isFacingRight && movement < 0f || !isFacingRight && movement > 0f)
+        float horizontal = Input.GetAxisRaw("Horizontal");
+
+        if (horizontal > 0)
         {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-            
+            transform.rotation = Quaternion.Euler(0, 0, 0); // Saða bak
+        }
+        else if (horizontal < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0); // Sola bak
         }
 
     }
