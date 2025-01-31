@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 3261409735580597347}
   - component: {fileID: 7039081830120328774}
   - component: {fileID: 4380293685729774620}
+  - component: {fileID: 6383212905083737361}
   m_Layer: 0
   m_Name: Eleman
   m_TagString: Untagged
@@ -160,8 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007cda96ea0abbb40ae952ba4dfadcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
-  jumpingPower: 55
+  speed: 15
+  jumpingPower: 10
   rb: {fileID: 6253361661465328862}
   groundCheck: {fileID: 3172341214114978046}
   groundLayer:
@@ -230,6 +231,24 @@ MonoBehaviour:
   bullet: {fileID: 1222134541093572438, guid: b853e551140426b45bf32d348ed23dce, type: 3}
   fireRate: 20
   lastfire: 0
+--- !u!114 &6383212905083737361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1688749771924786858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b097f03c6c0ec548a6d46cae9125be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 4986551729606123111}
+  attackRange: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  attackDamage: 40
 --- !u!1 &4209620776811410601
 GameObject:
   m_ObjectHideFlags: 0
