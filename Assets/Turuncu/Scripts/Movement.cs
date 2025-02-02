@@ -42,28 +42,37 @@ public class Movement : MonoBehaviour
 
         if(Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
         {
+            hands.transform.localScale = new Vector3(1, 1, 1);
             hands.transform.eulerAngles = Vector3.forward * 45;
         }
 
         if(Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
         {
-            hands.transform.eulerAngles = Vector3.forward * 135; //SPRITE HATALI
-        }
+            hands.transform.localScale = new Vector3(-1, 1, 1);
+            hands.transform.eulerAngles = Vector3.forward * -45; 
 
         if(Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
         {
+            hands.transform.localScale = new Vector3(1, 1, 1);
             hands.transform.eulerAngles = Vector3.forward * -45;
         }
 
         if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
         {
-            hands.transform.eulerAngles = Vector3.forward * -135;  //SPRITE HATALI
+            hands.transform.localScale = new Vector3(-1, 1, 1);
+            hands.transform.eulerAngles = Vector3.forward * 45;  
         }
 
         // Düzeltme iþi
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
         {
             hands.transform.eulerAngles = transform.eulerAngles;
+
+            if(hands.transform.localScale.x == -1)
+            {
+                hands.transform.localScale = new Vector3(1, 1, 1);
+
+            }
         }
        
 
