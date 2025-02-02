@@ -28,7 +28,7 @@ public class MeleeCombat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && !hasDrawn)
         {
             Debug.Log("F tuþuna basýldý, kýlýç çekiliyor...");
-            animator.SetBool("HasDrawn", true);
+            //animator.SetBool("HasDrawn", true);
             hasDrawn = true;
         }
     }
