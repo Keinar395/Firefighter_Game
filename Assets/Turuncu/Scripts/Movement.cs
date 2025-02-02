@@ -50,6 +50,7 @@ public class Movement : MonoBehaviour
         {
             hands.transform.localScale = new Vector3(-1, 1, 1);
             hands.transform.eulerAngles = Vector3.forward * -45; 
+        }
 
         if(Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
         {
