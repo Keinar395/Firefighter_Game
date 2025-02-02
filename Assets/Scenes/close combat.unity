@@ -348,7 +348,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -666,6 +666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Eleman
       objectReference: {fileID: 0}
+    - target: {fileID: 6383212905083737361, guid: d62a6a57f2ac6cb48988f4dc8322a36a, type: 3}
+      propertyPath: attackPoint
+      value: 
+      objectReference: {fileID: 85467155}
     - target: {fileID: 6383212905083737361, guid: d62a6a57f2ac6cb48988f4dc8322a36a, type: 3}
       propertyPath: enemyLayers.m_Bits
       value: 64

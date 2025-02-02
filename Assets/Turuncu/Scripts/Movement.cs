@@ -7,11 +7,6 @@ public class Movement : MonoBehaviour
     public float speed;
     public float jumpingPower = 16f;
     private bool isFacingRight = true;
-    private bool canDash = true;
-    private bool isDashing;
-    private float dashingPower = 30f;
-    private float dashingTime = 0.2f;
-    private float dashingCooldown = 1f;
     private bool doubleJump;
 
 
@@ -19,6 +14,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private TrailRenderer tr;
+    [SerializeField] private Transform hands;
 
     private float movement;
 
@@ -29,14 +25,51 @@ public class Movement : MonoBehaviour
     //movement kodlarý aaabisi
     void Update()
     {
-        if(isDashing)
-        {
-            return;
-        }
 
 
         movement = Input.GetAxisRaw("Horizontal");
-        if(IsGrounded() && Input.GetButtonDown("Jump"))
+
+        //Yukarý basýnca yukarý bakmasý aþaðý basýnca aþaðo bakmasý falan fiþman iþler
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            hands.transform.eulerAngles = Vector3.forward * 90;
+        }
+
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            hands.transform.eulerAngles = Vector3.forward * -90;
+        }
+
+        if(Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.D))
+        {
+            hands.transform.eulerAngles = Vector3.forward * 45;
+        }
+
+        if(Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.A))
+        {
+            hands.transform.eulerAngles = Vector3.forward * 135; //SPRITE HATALI
+        }
+
+        if(Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+        {
+            hands.transform.eulerAngles = Vector3.forward * -45;
+        }
+
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.A))
+        {
+            hands.transform.eulerAngles = Vector3.forward * -135;  //SPRITE HATALI
+        }
+
+        // Düzeltme iþi
+        if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S))
+        {
+            hands.transform.eulerAngles = transform.eulerAngles;
+        }
+       
+
+
+
+        if (IsGrounded() && Input.GetButtonDown("Jump"))
         {
             doubleJump = false;
         }
@@ -55,21 +88,16 @@ public class Movement : MonoBehaviour
             rb.velocity = new Vector2 (rb.velocity.x, rb.velocity.y * 0.5f);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
-        {
-            StartCoroutine(Dash());
-        }
         Flip();
     }
 
     void FixedUpdate()
     {
-
-        if (isDashing) 
-        { 
-            return ;
+        if(!Input.GetKey(KeyCode.LeftShift))
+        {
+            rb.velocity = new Vector2(movement * speed, rb.velocity.y);
         }
-        rb.velocity = new Vector2(movement * speed, rb.velocity.y);
+        
     }
     // yere deðme kontrolü
     private bool IsGrounded()
@@ -92,23 +120,6 @@ public class Movement : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, 180, 0); // Sola bak
         }
-
-    }
-    private IEnumerator Dash()
-    {
-        canDash = false;
-        isDashing = true;
-        float originalGravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        rb.velocity = new Vector2(transform.localScale.x * dashingPower, 0f);
-        tr.emitting = true;
-        yield return new WaitForSeconds(dashingTime);
-        tr.emitting = false;
-        rb.gravityScale = originalGravity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
-
 
     }
 
