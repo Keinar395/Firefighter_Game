@@ -6,11 +6,10 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
     public static Movement Instance { get; private set; }
-    
-    
+
+
     public float speed;
     public float jumpingPower = 16f;
-    private bool isFacingRight = true;
     private bool doubleJump;
 
 
@@ -38,20 +37,19 @@ public class Movement : MonoBehaviour
 
         movement = Input.GetAxisRaw("Horizontal");
 
-        HandleJump();
-
         Flip();
-    }
 
-    void FixedUpdate()
-    {
-        Stop();
         
+
+        if(OtherMovement.Instance.StopControl())
+        {
+            rb.velocity = new Vector2(movement * speed, rb.velocity.y);
+        }
     }
 
     public void Stop()
     {
-        rb.velocity = new Vector2(movement * speed, rb.velocity.y);
+        rb.velocity = new Vector2(0,0);
     }
 
     public void HandleJump()
@@ -60,20 +58,14 @@ public class Movement : MonoBehaviour
         {
             doubleJump = false;
         }
-
-        if (Input.GetButtonDown("Jump"))
+ 
+        
+        if (IsGrounded() || doubleJump)
         {
-            if (IsGrounded() || doubleJump)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
-                doubleJump = !doubleJump;
-            }
+            rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
+            doubleJump = !doubleJump;
+        }
 
-        }
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
     }
 
 

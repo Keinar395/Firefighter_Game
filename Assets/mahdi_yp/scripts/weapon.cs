@@ -17,18 +17,7 @@ public class weapon : MonoBehaviour
         Instance = this;
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            if(Time.time - lastfire > 1 /fireRate)
-            {
-                lastfire = Time.time;
-                
-            }
-            shoot();
-        }
-    }
+    
     public void shoot()
     {
         Instantiate(bullet,weapoon.position,weapoon.rotation);

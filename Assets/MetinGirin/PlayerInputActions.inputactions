@@ -69,6 +69,17 @@
                 },
                 {
                     "name": "",
+                    "id": "0ddb6ed0-7702-46e7-8d7e-3268b1cd0183",
+                    "path": "<XInputController>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Stop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "36eebe35-0b6e-456c-aa05-91ae94de3996",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -102,6 +113,17 @@
                 },
                 {
                     "name": "",
+                    "id": "5d50869a-5900-4024-a022-280fc53e8ecb",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f883ee4c-c8eb-4112-b9b8-6c6ca65ee975",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
@@ -126,6 +148,17 @@
                     "name": "",
                     "id": "2714dfa2-9025-40f2-9eae-470f728d4748",
                     "path": "<DualShockGamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7f374a43-9eed-4e22-b9ae-9336aef2521f",
+                    "path": "<XInputController>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
