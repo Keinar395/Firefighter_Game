@@ -5,21 +5,43 @@ using UnityEngine.InputSystem;
 
 public class OtherMovement : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public PlayerInput playerInput;
+    private PlayerInputActions playerInputs;
 
-    private void Start()
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        playerInput = GetComponent<PlayerInput>();
+        playerInputs = new PlayerInputActions();
+        playerInputs.Player.Enable();
 
-        playerInput.onActionTriggered += PlayerInput_onActionTriggered;
+        playerInputs.Player.Jump.performed += PlayerJump;
+        playerInputs.Player.Stop.performed += PlayerStop;
+        playerInputs.Player.Fire.performed += PlayerFire;
+
     }
 
-    private void PlayerInput_onActionTriggered(InputAction.CallbackContext obj)
+    private void PlayerFire(InputAction.CallbackContext context)
     {
-        Debug.Log(obj);
+        Debug.Log(context);
+        if (context.ReadValueAsButton())
+        {
+            weapon.Instance.shoot();
+        }
     }
 
+    private void PlayerStop(InputAction.CallbackContext context)
+    {
+        Debug.Log(context);
+        if (!context.ReadValueAsButton())
+        {
+            Movement.Instance.Stop();
+        }
+    }
 
+    private void PlayerJump(InputAction.CallbackContext context)
+    {
+        Debug.Log(context);
+        if(context.ReadValueAsButton())
+        {
+            Movement.Instance.HandleJump();
+        }
+    }
 }

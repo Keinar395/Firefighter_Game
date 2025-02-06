@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class weapon : MonoBehaviour
-{   public Rigidbody2D rig;
+{
+    public static weapon Instance { get; private set; }
+
+    public Rigidbody2D rig;
     public Transform weapoon;
     public GameObject bullet;
     public float fireRate = 20;
     public float lastfire;
 
-    // Update is called once per frame
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.J))
@@ -22,7 +29,7 @@ public class weapon : MonoBehaviour
             shoot();
         }
     }
-    void shoot()
+    public void shoot()
     {
         Instantiate(bullet,weapoon.position,weapoon.rotation);
     }

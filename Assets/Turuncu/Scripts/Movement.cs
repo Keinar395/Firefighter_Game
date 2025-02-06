@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
+    public static Movement Instance { get; private set; }
+    
+    
     public float speed;
     public float jumpingPower = 16f;
     private bool isFacingRight = true;
@@ -19,6 +22,12 @@ public class Movement : MonoBehaviour
 
     private float movement;
 
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,6 +38,24 @@ public class Movement : MonoBehaviour
 
         movement = Input.GetAxisRaw("Horizontal");
 
+        HandleJump();
+
+        Flip();
+    }
+
+    void FixedUpdate()
+    {
+        Stop();
+        
+    }
+
+    public void Stop()
+    {
+        rb.velocity = new Vector2(movement * speed, rb.velocity.y);
+    }
+
+    public void HandleJump()
+    {
         if (IsGrounded() && Input.GetButtonDown("Jump"))
         {
             doubleJump = false;
@@ -41,24 +68,16 @@ public class Movement : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
                 doubleJump = !doubleJump;
             }
-            
-        }
-        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f) 
-        {
-            rb.velocity = new Vector2 (rb.velocity.x, rb.velocity.y * 0.5f);
-        }
 
-        Flip();
+        }
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+        }
     }
 
-    void FixedUpdate()
-    {
-        if(!Input.GetKey(KeyCode.LeftShift))
-        {
-            rb.velocity = new Vector2(movement * speed, rb.velocity.y);
-        }
-        
-    }
+
+
     // yere deðme kontrolü
     private bool IsGrounded()
     {
