@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Eightway : MonoBehaviour
 {
-    public float rotationSpeed = 20f; // Dönme hýzý
+    private float rotationSpeed = 7f; // Dönme hýzý
     private Vector2 moveInput;
 
     void Update()
