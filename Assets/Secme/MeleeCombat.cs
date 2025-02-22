@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class MeleeCombat : MonoBehaviour
 {
+
+    public static MeleeCombat Instance { get; private set; }
+
     private Animator animator;
-    private bool hasDrawn = false;
+    //private bool hasDrawn = false;
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
     public int attackDamage = 40;
+
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -18,31 +27,31 @@ public class MeleeCombat : MonoBehaviour
 
     void Update()
     {
-        HandleSwordDraw();
+        //HandleSwordDraw();
         HandleAttack();
     }
 
 
-    private void HandleSwordDraw()
-    {
-        if (Input.GetKeyDown(KeyCode.F) && !hasDrawn)
-        {
-            Debug.Log("F tuþuna basýldý, kýlýç çekiliyor...");
-            //animator.SetBool("HasDrawn", true);
-            hasDrawn = true;
-        }
-    }
+    //private void HandleSwordDraw()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.F) && !hasDrawn)
+    //    {
+    //        Debug.Log("F tuþuna basýldý, kýlýç çekiliyor...");
+    //        //animator.SetBool("HasDrawn", true);
+    //        hasDrawn = true;
+    //    }
+    //}
 
 
     private void HandleAttack()
     {
-        if (hasDrawn && Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             Attack();
         }
     }
 
-    private void Attack()
+    public void Attack()
     {
         // Placeholder for attack logic (e.g., detecting and damaging enemies).
         Debug.Log("Performed attack!");

@@ -8,8 +8,8 @@ public class Movement : MonoBehaviour
     public static Movement Instance { get; private set; }
 
 
-    public float speed;
-    public float jumpingPower = 16f;
+    private float speed = 7f;
+    private float jumpingPower = 10f;
     private bool doubleJump;
 
 

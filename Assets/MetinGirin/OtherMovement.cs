@@ -23,10 +23,18 @@ public class OtherMovement : MonoBehaviour
         playerInputs.Player.Stop.performed += PlayerStop;
         playerInputs.Player.Stop.canceled += PlayerStop_canceled;
         playerInputs.Player.Fire.performed += PlayerFire;
+        playerInputs.Player.Attack.performed += PlayerAttack;
 
     }
 
-    
+    private void PlayerAttack(InputAction.CallbackContext context)
+    {
+        Debug.Log(context);
+        if (context.ReadValueAsButton())
+        {
+            MeleeCombat.Instance.Attack();
+        }
+    }
 
     private void PlayerFire(InputAction.CallbackContext context)
     {
