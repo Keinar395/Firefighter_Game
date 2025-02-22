@@ -35,11 +35,13 @@ public class Enemy : MonoBehaviour
         {
             if(transform.position.x > player.position.x)
             {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
                 transform.position += Vector3.left * chaseSpeed * Time.deltaTime;
             }
 
             if (transform.position.x < player.position.x)
             {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
                 transform.position += Vector3.right * chaseSpeed * Time.deltaTime;
             }
         }
@@ -89,19 +91,19 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         Debug.Log("düþman öldü");
-        speed = 0;
+        rb.velocity = Vector2.zero;
         //ölüm animasyonu ve sesi buraya eklenecek 
         Destroy(gameObject, enmyDieTime);
     }
 
     private void Flip()
     {
-
-        if (currentPoint == pointB.transform)
+    
+        if (currentPoint == pointB.transform || transform.position.x < player.position.x)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0); // Saða bak
         }
-        else if (currentPoint == pointA.transform)
+        else if (currentPoint == pointA.transform || transform.position.x > player.position.x)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0); // Sola bak
         }
