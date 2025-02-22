@@ -15,8 +15,14 @@ public class Enemy : MonoBehaviour
     public Transform player;
     public bool isChasing;
     private float distance = 10f;
-    
-    
+
+
+    private bool isKnockedBack = false; // Knockback sýrasýnda kontrolü durdurmak için
+
+    [SerializeField] private float knockbackForce = 5f;
+    [SerializeField] private float knockbackDuration = 0.2f; // Knockback süresi
+
+
     public int maxHealth = 100;
     public int enmyDieTime = 3;
     int currentHealth;
@@ -78,20 +84,46 @@ public class Enemy : MonoBehaviour
         Flip();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector2 attackPosition)
     {
         currentHealth -= damage;
+        
         // sonradan hurt anim ve ses eklenecek buraya
         if (currentHealth <= 0)
         {
             Die();
         }
+
+        if (!isKnockedBack)
+        {
+            StartCoroutine(KnockbackRoutine(attackPosition));
+        }
+
+    }
+
+    private IEnumerator KnockbackRoutine(Vector2 attackPosition)
+    {
+        isKnockedBack = true;
+
+        // Hasar aldýðý noktayla düþman arasýndaki yönü bul
+        Vector2 knockbackDirection = (transform.position - (Vector3)attackPosition).normalized;
+
+        // Knockback kuvvetini uygula
+        rb.velocity = knockbackDirection * knockbackForce;
+
+        // Belirtilen süre kadar bekle
+        yield return new WaitForSeconds(knockbackDuration);
+
+        // Knockback bitti, düþman tekrar kontrol edilebilir
+        isKnockedBack = false;
+        rb.velocity = Vector2.zero; // Knockback'ten sonra durmasý için
     }
 
     void Die()
     {
         Debug.Log("düþman öldü");
-        rb.velocity = Vector2.zero;
+        speed = 0;
+        chaseSpeed = 0;
         //ölüm animasyonu ve sesi buraya eklenecek 
         Destroy(gameObject, enmyDieTime);
     }

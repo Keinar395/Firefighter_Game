@@ -757,7 +757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1593998364689185397, guid: e705e75d9118a1f42970ad39b6cbe2d2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.48
+      value: 0.99
       objectReference: {fileID: 0}
     - target: {fileID: 1593998364689185397, guid: e705e75d9118a1f42970ad39b6cbe2d2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -803,6 +803,14 @@ PrefabInstance:
       propertyPath: pointB
       value: 
       objectReference: {fileID: 402039425}
+    - target: {fileID: 6730833128672057394, guid: e705e75d9118a1f42970ad39b6cbe2d2, type: 3}
+      propertyPath: maxHealth
+      value: 900
+      objectReference: {fileID: 0}
+    - target: {fileID: 6730833128672057394, guid: e705e75d9118a1f42970ad39b6cbe2d2, type: 3}
+      propertyPath: knockbackForce
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
