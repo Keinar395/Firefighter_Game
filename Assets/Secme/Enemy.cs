@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour
     public bool isChasing;
     private float distance = 10f;
 
+    public HealthBar healthBar;
+    public PostureBar postureBar;
+
 
     private bool isKnockedBack = false; // Knockback sýrasýnda kontrolü durdurmak için
 
@@ -30,6 +33,9 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        postureBar.SetMaxPosture(100);
+        postureBar.SetPosture(0);
         currentPoint = pointB.transform;
     }
 
@@ -87,6 +93,9 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage, Vector2 attackPosition)
     {
         currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
+        postureBar.AddPosture(10);
         
         // sonradan hurt anim ve ses eklenecek buraya
         if (currentHealth <= 0)

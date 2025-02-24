@@ -5,16 +5,22 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider slider;
-
+    public Slider healthSlider;
 
     public void SetMaxHealth(int health)
     {
-        slider.maxValue = health;
-        slider.value = health;
+        healthSlider.maxValue = health;
+        healthSlider.value = health;
     }
     public void SetHealth(int health)
     {
-        slider.value = health;
+        healthSlider.value = health;
     }
+
+    void Update()
+    {
+        transform.rotation = Quaternion.identity; // Can barýný sabit tut
+    }
+
+
 }
