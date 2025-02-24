@@ -9,8 +9,14 @@ public class Movement : MonoBehaviour
 
 
     private float speed = 7f;
-    private float jumpingPower = 10f;
+    private float jumpingPower = 20f;
     private bool doubleJump;
+
+    private bool canDash = true;
+    private bool isDashing;
+    private float dashingPower = 24f;
+    private float dashingTime = 0.2f;
+    private float dashingCooldown = 1f;
 
 
     [SerializeField] private Rigidbody2D rb;
@@ -34,6 +40,11 @@ public class Movement : MonoBehaviour
     //movement kodlarý aaabisi
     void Update()
     {
+        if(isDashing)
+        {
+            return;
+        }
+
 
         movement = Input.GetAxisRaw("Horizontal");
 
@@ -92,6 +103,24 @@ public class Movement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0); // Sola bak
         }
 
+    }
+
+    private IEnumerator Dash()
+    {
+        canDash = false;
+        isDashing = true;
+
+        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * dashingPower;
+        yield return new WaitForSeconds(dashingTime);
+
+        isDashing = false;
+        yield return new WaitForSeconds(dashingCooldown);
+        canDash = true;
+    }
+
+    public void DashC()
+    {
+        StartCoroutine(Dash());
     }
 
 

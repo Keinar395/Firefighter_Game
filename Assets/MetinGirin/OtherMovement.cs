@@ -24,7 +24,17 @@ public class OtherMovement : MonoBehaviour
         playerInputs.Player.Stop.canceled += PlayerStop_canceled;
         playerInputs.Player.Fire.performed += PlayerFire;
         playerInputs.Player.Attack.performed += PlayerAttack;
+        playerInputs.Player.Dash.performed += PlayerDash;
 
+    }
+
+    private void PlayerDash(InputAction.CallbackContext context)
+    {
+        Debug.Log(context);
+        if (context.ReadValueAsButton())
+        {
+            Movement.Instance.DashC();
+        }
     }
 
     private void PlayerAttack(InputAction.CallbackContext context)
