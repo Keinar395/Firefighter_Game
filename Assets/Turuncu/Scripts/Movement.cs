@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
     private int currentHealth;
     private int dieTime = 2;
 
+    public HealthBar healthBar;
+
     private float speed = 7f;
     private float jumpingPower = 20f;
     private bool doubleJump;
@@ -25,7 +27,6 @@ public class Movement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private TrailRenderer tr;
     [SerializeField] private Transform hands;
 
     private float movement;
@@ -40,6 +41,7 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
     //movement kodlarý aaabisi
     void Update()
@@ -130,6 +132,8 @@ public class Movement : MonoBehaviour
     public void Hitted(int damage)
     {
         currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
 
         if (currentHealth <= 0)
         {
