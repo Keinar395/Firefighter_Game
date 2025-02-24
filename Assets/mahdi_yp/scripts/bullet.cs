@@ -28,7 +28,7 @@ public class bullet : MonoBehaviour
 
         if(enemy != null)
         {
-            enemy.TakeDamage(20, transform.position);
+            enemy.TakeDamage(20, 40, transform.position);
 
         }
 

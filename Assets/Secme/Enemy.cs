@@ -16,23 +16,25 @@ public class Enemy : MonoBehaviour
     public bool isChasing;
     private float distance = 10f;
 
-    public HealthBar healthBar;
-    public PostureBar postureBar;
-
-
     private bool isKnockedBack = false; // Knockback sýrasýnda kontrolü durdurmak için
 
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.2f; // Knockback süresi
 
 
+    public HealthBar healthBar;
+    public PostureBar postureBar;
+
     public int maxHealth = 100;
+    public int maxPosture = 100;
     public int enmyDieTime = 3;
     int currentHealth;
+    int posture;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+        posture = maxPosture;
         healthBar.SetMaxHealth(maxHealth);
         postureBar.SetMaxPosture(100);
         postureBar.SetPosture(0);
@@ -90,17 +92,25 @@ public class Enemy : MonoBehaviour
         Flip();
     }
 
-    public void TakeDamage(int damage, Vector2 attackPosition)
+    public void TakeDamage(int damage, int pdamage, Vector2 attackPosition)
     {
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
-        postureBar.AddPosture(10);
+        postureBar.AddPosture(posture);
         
         // sonradan hurt anim ve ses eklenecek buraya
         if (currentHealth <= 0)
         {
             Die();
+        }
+
+        if(posture >= 100)
+        {
+            postureBar.SetPosture(100);
+            speed = 0;
+            chaseSpeed = 0;
+            isKnockedBack = true;
         }
 
         if (!isKnockedBack)

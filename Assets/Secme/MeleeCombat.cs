@@ -59,7 +59,7 @@ public class MeleeCombat : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage, transform.position);
+            enemy.GetComponent<Enemy>().TakeDamage(attackDamage, 10, transform.position);
         }
 
     }
