@@ -141,4 +141,17 @@ public class Enemy : MonoBehaviour
         }
 
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            Movement player = collision.gameObject.GetComponent<Movement>(); 
+
+            if(player != null)
+            {
+                player.Hitted(100);
+            }
+        }
+    }
 }

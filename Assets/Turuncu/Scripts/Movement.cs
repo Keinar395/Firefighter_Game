@@ -7,6 +7,9 @@ public class Movement : MonoBehaviour
 {
     public static Movement Instance { get; private set; }
 
+    private int maxHealth = 1000;
+    private int currentHealth;
+    private int dieTime = 2;
 
     private float speed = 7f;
     private float jumpingPower = 20f;
@@ -36,6 +39,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
     }
     //movement kodlarý aaabisi
     void Update()
@@ -121,6 +125,24 @@ public class Movement : MonoBehaviour
     public void DashC()
     {
         StartCoroutine(Dash());
+    }
+
+    public void Hitted(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log("Öldün!");
+        
+        //ölüm animasyonu ve sesi buraya eklenecek 
+        Destroy(gameObject, dieTime);
     }
 
 
