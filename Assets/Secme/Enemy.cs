@@ -26,15 +26,13 @@ public class Enemy : MonoBehaviour
     public PostureBar postureBar;
 
     public int maxHealth = 100;
-    public int maxPosture = 100;
     public int enmyDieTime = 3;
     int currentHealth;
-    int posture;
+    int posture = 0;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
-        posture = maxPosture;
         healthBar.SetMaxHealth(maxHealth);
         postureBar.SetMaxPosture(100);
         postureBar.SetPosture(0);
@@ -95,9 +93,10 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage, int pdamage, Vector2 attackPosition)
     {
         currentHealth -= damage;
+        posture += pdamage;
 
         healthBar.SetHealth(currentHealth);
-        postureBar.AddPosture(posture);
+        postureBar.AddPosture(pdamage);
         
         // sonradan hurt anim ve ses eklenecek buraya
         if (currentHealth <= 0)
