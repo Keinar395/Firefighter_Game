@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     public int maxHealth = 100;
     public int enmyDieTime = 3;
     int currentHealth;
-    int posture = 0;
+    public int posture = 0;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

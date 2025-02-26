@@ -7,13 +7,15 @@ public class EnemyWeapon : MonoBehaviour
     public Transform player;
     public Transform firePoint;
     public GameObject enemyBullet;
-    Enemy enemy;
+    public Enemy enemy;
 
     private float shotCooldown;
     private float startShotCooldown = 1f;
     void Start()
     {
         shotCooldown = startShotCooldown;
+        enemy = FindObjectOfType<Enemy>();
+
     }
 
     // Update is called once per frame
@@ -22,7 +24,7 @@ public class EnemyWeapon : MonoBehaviour
         Vector2 direction = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
         transform.up = direction;
 
-        if(shotCooldown <= 0)
+        if(shotCooldown <= 0 && enemy.posture < 100)
         {
             Instantiate(enemyBullet, firePoint.position, firePoint.rotation);
             shotCooldown = startShotCooldown;
