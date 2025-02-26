@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public bool isRanged = false;
 
     public GameObject pointA;
     public GameObject pointB;
@@ -41,11 +42,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        Vector2 point = currentPoint.position - transform.position;
-
-        if(isChasing)
+        if (isChasing)
         {
-            if(transform.position.x > player.position.x)
+            if (transform.position.x > player.position.x)
             {
                 transform.rotation = Quaternion.Euler(0, 0, 0);
                 transform.position += Vector3.left * chaseSpeed * Time.deltaTime;
@@ -59,12 +58,20 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if(Vector2.Distance(transform.position, player.position) < distance)
+            if (Vector2.Distance(transform.position, player.position) < distance)
             {
-                isChasing = true;
+                if(isRanged)
+                {
+                    speed = 0;
+                }
+                else
+                {
+                    isChasing = true;
+                }
+                
             }
-            
-            
+
+
             if (currentPoint == pointB.transform)
             {
                 rb.velocity = new Vector2(speed, 0);
@@ -74,18 +81,24 @@ public class Enemy : MonoBehaviour
                 rb.velocity = new Vector2(-speed, 0);
             }
 
-            if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointB.transform)
+            if (Vector2.Distance(transform.position, currentPoint.position) < 1f && currentPoint == pointB.transform)
             {
                 currentPoint = pointA.transform;
             }
 
-            if (Vector2.Distance(transform.position, currentPoint.position) < 0.5f && currentPoint == pointA.transform)
+            if (Vector2.Distance(transform.position, currentPoint.position) < 1f && currentPoint == pointA.transform)
             {
                 currentPoint = pointB.transform;
             }
         }
 
-        
+
+
+
+
+
+
+
 
         Flip();
     }
