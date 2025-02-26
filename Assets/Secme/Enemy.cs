@@ -123,6 +123,7 @@ public class Enemy : MonoBehaviour
             speed = 0;
             chaseSpeed = 0;
             isKnockedBack = true;
+            currentHealth -= damage * 10;
         }
 
         if (!isKnockedBack)
