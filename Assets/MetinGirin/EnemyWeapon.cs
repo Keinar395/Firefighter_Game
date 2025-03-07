@@ -11,6 +11,7 @@ public class EnemyWeapon : MonoBehaviour
 
     private float shotCooldown;
     private float startShotCooldown = 1f;
+    private float distance = 25f;
     void Start()
     {
         shotCooldown = startShotCooldown;
@@ -24,14 +25,18 @@ public class EnemyWeapon : MonoBehaviour
         Vector2 direction = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
         transform.up = direction;
 
-        if(shotCooldown <= 0 && enemy.posture < 100)
+        if (Vector2.Distance(transform.position, player.position) < distance)
         {
-            Instantiate(enemyBullet, firePoint.position, firePoint.rotation);
-            shotCooldown = startShotCooldown;
+            if (shotCooldown <= 0)
+            {
+                Instantiate(enemyBullet, firePoint.position, firePoint.rotation);
+                shotCooldown = startShotCooldown;
+            }
+            else
+            {
+                shotCooldown -= Time.deltaTime;
+            }
         }
-        else
-        {
-            shotCooldown -= Time.deltaTime;
-        }
+        
     }
 }

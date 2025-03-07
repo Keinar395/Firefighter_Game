@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
 
     public HealthBar healthBar;
     public PostureBar postureBar;
+    public GameObject enemyWeapon;
 
     public int maxHealth = 100;
     public int enmyDieTime = 3;
@@ -122,6 +123,7 @@ public class Enemy : MonoBehaviour
             postureBar.SetPosture(100);
             speed = 0;
             chaseSpeed = 0;
+            enemyWeapon.SetActive(false);
             isKnockedBack = true;
             currentHealth -= damage * 10;
         }

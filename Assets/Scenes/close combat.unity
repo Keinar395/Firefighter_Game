@@ -198,6 +198,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200883283}
   m_CullTransparentMesh: 1
+--- !u!1001 &219987873
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6152891004594005857, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 25.051796
+      objectReference: {fileID: 0}
+    - target: {fileID: 6152891004594005857, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 94.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 6152891004594005857, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6152891004594005857, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6152891004594005857, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6152891004594005857, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6152891004594005857, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6152891004594005857, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6152891004594005857, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6152891004594005857, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6152891004594005857, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156210551154059194, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_Name
+      value: Ground (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156210551154059194, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156210551154059194, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b1fd66fa3b695944197b132ce751c8f5, type: 3}
 --- !u!1 &310173068
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,17 +871,6 @@ Transform:
   - {fileID: 1488801280}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1225650483 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6362140849964220463, guid: f5266057e10fe0f488dbbb871e7fce65, type: 3}
-  m_PrefabInstance: {fileID: 4558084899886938679}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a74cf21b2b94ccb4ba0ca93298790e12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1323086720
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1409,10 +1467,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5741995814054882776, guid: f5266057e10fe0f488dbbb871e7fce65, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6362140849964220463, guid: f5266057e10fe0f488dbbb871e7fce65, type: 3}
       propertyPath: player
       value: 
@@ -1425,10 +1479,6 @@ PrefabInstance:
       propertyPath: pointB
       value: 
       objectReference: {fileID: 1323985266}
-    - target: {fileID: 6530147997892835733, guid: f5266057e10fe0f488dbbb871e7fce65, type: 3}
-      propertyPath: enemy
-      value: 
-      objectReference: {fileID: 1225650483}
     - target: {fileID: 6530147997892835733, guid: f5266057e10fe0f488dbbb871e7fce65, type: 3}
       propertyPath: player
       value: 
@@ -1451,6 +1501,7 @@ SceneRoots:
   - {fileID: 1323086720}
   - {fileID: 342879618}
   - {fileID: 446914778}
+  - {fileID: 219987873}
   - {fileID: 1833065530}
   - {fileID: 2936264168191509874}
   - {fileID: 4558084899886938679}
