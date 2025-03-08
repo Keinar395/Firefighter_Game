@@ -22,6 +22,7 @@ public class Movement : MonoBehaviour
     private float dashingPower = 24f;
     private float dashingTime = 0.2f;
     private float dashingCooldown = 1f;
+    private bool hasDashed = false;
 
 
     [SerializeField] private Rigidbody2D rb;
@@ -42,6 +43,7 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+ 
     }
     //movement kodlarý aaabisi
     void Update()
@@ -113,15 +115,42 @@ public class Movement : MonoBehaviour
 
     private IEnumerator Dash()
     {
-        canDash = false;
-        isDashing = true;
+        if (IsGrounded())
+        {
+            hasDashed = false;
 
-        rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * dashingPower;
-        yield return new WaitForSeconds(dashingTime);
+            canDash = false;
+            isDashing = true;
 
-        isDashing = false;
-        yield return new WaitForSeconds(dashingCooldown);
-        canDash = true;
+            rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * dashingPower;
+            yield return new WaitForSeconds(dashingTime);
+
+            isDashing = false;
+            yield return new WaitForSeconds(dashingCooldown);
+            canDash = true;
+
+        }
+
+
+        else if (!IsGrounded() && !hasDashed)
+        {
+
+            hasDashed = true;
+
+            canDash = false;
+            isDashing = true;
+
+            rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * dashingPower;
+            yield return new WaitForSeconds(dashingTime);
+
+            isDashing = false;
+            yield return new WaitForSeconds(dashingCooldown);
+            //canDash = true;
+
+        }
+
+
+        
     }
 
     public void DashC()

@@ -35,6 +35,7 @@ Transform:
   m_Children:
   - {fileID: 7832974171957766510}
   - {fileID: 3336757954055929129}
+  - {fileID: 4666041014514306326}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3618415212546925104
@@ -172,8 +173,10 @@ MonoBehaviour:
   knockbackDuration: 0.2
   healthBar: {fileID: 4775945164144650685}
   postureBar: {fileID: 2344917008039631200}
+  enemyWeapon: {fileID: 3330990125117598272}
   maxHealth: 900
   enmyDieTime: 1
+  posture: 0
 --- !u!1 &1432004522118393390
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +430,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3330990125117598272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4666041014514306326}
+  m_Layer: 6
+  m_Name: EHands
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4666041014514306326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3330990125117598272}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1593998364689185397}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4272558698291089251
 GameObject:
   m_ObjectHideFlags: 0

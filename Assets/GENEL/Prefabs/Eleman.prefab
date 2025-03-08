@@ -208,12 +208,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 007cda96ea0abbb40ae952ba4dfadcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   rb: {fileID: 6253361661465328862}
   groundCheck: {fileID: 3172341214114978046}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  tr: {fileID: 0}
   hands: {fileID: 4986551729606123111}
 --- !u!114 &4380293685729774620
 MonoBehaviour:
@@ -307,6 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3f7d03805e95942bac3f7365ecea00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponTransform: {fileID: 638703097930730643}
 --- !u!1 &7453246018645067496
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +366,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.24, y: 0, z: 0}
-  m_LocalScale: {x: 0.560287, y: 0.560287, z: 0.560287}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.560287}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4986551729606123111}
