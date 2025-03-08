@@ -6,6 +6,7 @@ public class Eightway : MonoBehaviour
 {
     private float rotationSpeed = 7f; // Dönme hýzý
     private Vector2 moveInput;
+    public Transform weaponTransform;
 
     void Update()
     {
@@ -24,8 +25,19 @@ public class Eightway : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
 
 
-        
+        if (moveInput.x > 0) // Saða gidiyorsa
+        {
+            weaponTransform.localScale = new Vector3(0.5f, 0.5f, 1); // Silahý düz tut
+        }
+        else if (moveInput.x < 0) // Sola gidiyorsa
+        {
+            weaponTransform.localScale = new Vector3(0.5f, -0.5f, 1); // Silahý ters çevir
+        }
+
+
     }
+
+
 
 
     
