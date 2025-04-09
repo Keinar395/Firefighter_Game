@@ -26,12 +26,18 @@ public class bullet : MonoBehaviour
     {
         Enemy enemy = collision.GetComponent<Enemy>();
 
+        BossHealth boss = collision.GetComponent<BossHealth>();
+
         Movement player = collision.GetComponent<Movement>();
 
         if(enemy != null)
         {
             enemy.TakeDamage(20, 40, transform.position);
+        }
 
+        if (boss != null)
+        {
+            boss.TakeDamage(20, 40);
         }
 
         if (player != null)

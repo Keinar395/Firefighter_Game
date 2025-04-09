@@ -122,7 +122,7 @@ public class Movement : MonoBehaviour
             canDash = false;
             isDashing = true;
 
-            rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * dashingPower;
+            rb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), rb.velocity.y) * dashingPower;
             yield return new WaitForSeconds(dashingTime);
 
             isDashing = false;
@@ -177,6 +177,8 @@ public class Movement : MonoBehaviour
         //ölüm animasyonu ve sesi buraya eklenecek 
         Destroy(gameObject, dieTime);
     }
+
+
 
 
 }

@@ -8,7 +8,6 @@ public class MeleeCombat : MonoBehaviour
     public static MeleeCombat Instance { get; private set; }
 
     private Animator animator;
-    //private bool hasDrawn = false;
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
@@ -27,20 +26,8 @@ public class MeleeCombat : MonoBehaviour
 
     void Update()
     {
-        //HandleSwordDraw();
         HandleAttack();
     }
-
-
-    //private void HandleSwordDraw()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.F) && !hasDrawn)
-    //    {
-    //        Debug.Log("F tuþuna basýldý, kýlýç çekiliyor...");
-    //        //animator.SetBool("HasDrawn", true);
-    //        hasDrawn = true;
-    //    }
-    //}
 
 
     private void HandleAttack()
@@ -48,18 +35,28 @@ public class MeleeCombat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             Attack();
+            AttackBoss();
         }
     }
 
     public void Attack()
     {
-        // Placeholder for attack logic (e.g., detecting and damaging enemies).
-        Debug.Log("Performed attack!");
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers); ;
 
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<Enemy>().TakeDamage(attackDamage, 10, transform.position);
+        }
+
+    }
+
+    public void AttackBoss()
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers); ;
+
+        foreach (Collider2D boss in hitEnemies)
+        {
+            boss.GetComponent<BossHealth>().TakeDamage(attackDamage, 10);
         }
 
     }
