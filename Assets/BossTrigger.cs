@@ -7,7 +7,7 @@ public class CameraAnchorCinemachine : MonoBehaviour
 
     public Transform player;
 
-    public GameObject BossHealth, BossPosture;
+    public GameObject BossHealth, BossPosture, Boss;
 
     public float triggerDistance = 15f;
 
@@ -15,6 +15,7 @@ public class CameraAnchorCinemachine : MonoBehaviour
     {
         BossHealth.SetActive(false);
         BossPosture.SetActive(false);
+        Boss.SetActive(false);
     }
 
     void Update()
@@ -29,6 +30,7 @@ public class CameraAnchorCinemachine : MonoBehaviour
             bossVirtualCam.Priority = 100;
             BossHealth.SetActive(true);
             BossPosture.SetActive(true);
+            Boss.SetActive(true);
         }
         else
         {
@@ -36,6 +38,7 @@ public class CameraAnchorCinemachine : MonoBehaviour
             bossVirtualCam.Priority = 0;  // Varsayýlan takip mesafesi
             BossHealth.SetActive(false);
             BossPosture.SetActive(false);
+
         }
     }
 

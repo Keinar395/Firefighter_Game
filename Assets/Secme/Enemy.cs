@@ -22,7 +22,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.2f; // Knockback süresi
 
-
     public HealthBar healthBar;
     public PostureBar postureBar;
     public GameObject enemyWeapon;
@@ -120,11 +119,8 @@ public class Enemy : MonoBehaviour
 
         if(posture >= 100)
         {
-            postureBar.SetPosture(100);
-            speed = 0;
-            chaseSpeed = 0;
-            enemyWeapon.SetActive(false);
-            isKnockedBack = true;
+            Invoke("PostureBroken", 0.5f);
+            Invoke("PostureNotBroken", 5);
             currentHealth -= damage * 10;
         }
 
@@ -133,6 +129,25 @@ public class Enemy : MonoBehaviour
             StartCoroutine(KnockbackRoutine(attackPosition));
         }
 
+    }
+
+    public void PostureBroken()
+    {
+        postureBar.SetPosture(100);
+        speed = 0;
+        chaseSpeed = 0;
+        enemyWeapon.SetActive(false);
+        isKnockedBack = true;
+    }
+
+    public void PostureNotBroken()
+    {
+        postureBar.SetPosture(0);
+        posture = 0;
+        speed = 3f;
+        chaseSpeed = 4f;
+        enemyWeapon.SetActive(true);
+        isKnockedBack = false;
     }
 
     private IEnumerator KnockbackRoutine(Vector2 attackPosition)

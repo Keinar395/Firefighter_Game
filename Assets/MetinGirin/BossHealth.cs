@@ -8,6 +8,8 @@ public class BossHealth : MonoBehaviour
     public HealthBar healthBar;
     public PostureBar postureBar;
 
+    Animator animator;
+
     
 
 
@@ -22,6 +24,8 @@ public class BossHealth : MonoBehaviour
         healthBar.SetMaxHealth(health);
         postureBar.SetMaxPosture(100);
         postureBar.SetPosture(0);
+
+        Boss_Run boss_Run = GetComponent<Boss_Run>();
     }
 
     public void TakeDamage(int damage, int pdamage)
@@ -29,22 +33,35 @@ public class BossHealth : MonoBehaviour
         if (isInvulnerable)
             return;
 
-        health -= damage;
+        currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
         postureBar.AddPosture(pdamage);
 
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
 
         if (posture >= 100)
         {
-            postureBar.SetPosture(100);
-            //Boss_Run.speed = 0;
+            Invoke("PostureBroken", 0.5f);
+            Invoke("PostureNotBroken", 5);
             currentHealth -= damage * 10;
         }
+    }
+
+    public void PostureBroken()
+    {
+        postureBar.SetPosture(100);
+        animator.SetBool("Stun", true);
+    }
+
+    public void PostureNotBroken()
+    {
+        postureBar.SetPosture(0);
+        posture = 0;
+        animator.SetBool("Stun", false);  
     }
 
     void Die()
