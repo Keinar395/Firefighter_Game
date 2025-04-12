@@ -8,7 +8,7 @@ public class BossHealth : MonoBehaviour
     public HealthBar healthBar;
     public PostureBar postureBar;
 
-    Animator animator;
+    public Animator animator;
 
     
 
@@ -26,6 +26,7 @@ public class BossHealth : MonoBehaviour
         postureBar.SetPosture(0);
 
         Boss_Run boss_Run = GetComponent<Boss_Run>();
+        animator = GetComponent<Animator>();
     }
 
     public void TakeDamage(int damage, int pdamage)
@@ -34,6 +35,7 @@ public class BossHealth : MonoBehaviour
             return;
 
         currentHealth -= damage;
+        posture += pdamage;
 
         healthBar.SetHealth(currentHealth);
         postureBar.AddPosture(pdamage);
@@ -47,7 +49,6 @@ public class BossHealth : MonoBehaviour
         {
             Invoke("PostureBroken", 0.5f);
             Invoke("PostureNotBroken", 5);
-            currentHealth -= damage * 10;
         }
     }
 
@@ -55,6 +56,7 @@ public class BossHealth : MonoBehaviour
     {
         postureBar.SetPosture(100);
         animator.SetBool("Stun", true);
+        
     }
 
     public void PostureNotBroken()
@@ -62,6 +64,7 @@ public class BossHealth : MonoBehaviour
         postureBar.SetPosture(0);
         posture = 0;
         animator.SetBool("Stun", false);  
+        
     }
 
     void Die()

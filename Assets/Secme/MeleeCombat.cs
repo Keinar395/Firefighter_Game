@@ -35,7 +35,6 @@ public class MeleeCombat : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             Attack();
-            AttackBoss();
         }
     }
 
@@ -45,21 +44,28 @@ public class MeleeCombat : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<Enemy>().TakeDamage(attackDamage, 10, transform.position);
+            if (enemy.TryGetComponent<Enemy>(out var e))
+            {
+                e.TakeDamage(attackDamage, 10, transform.position);
+            }
+            else if (enemy.TryGetComponent<BossHealth>(out var b))
+            {
+                b.TakeDamage(attackDamage, 10);
+            }
         }
 
     }
 
-    public void AttackBoss()
-    {
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers); ;
+    //public void AttackBoss()
+    //{
+    //    Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers); ;
 
-        foreach (Collider2D boss in hitEnemies)
-        {
-            boss.GetComponent<BossHealth>().TakeDamage(attackDamage, 10);
-        }
+    //    foreach (Collider2D boss in hitEnemies)
+    //    {
+    //        boss.GetComponent<BossHealth>().TakeDamage(attackDamage, 10);
+    //    }
 
-    }
+    //}
     void OnDrawGizmosSelected()
     {
         if (attackPoint == null)

@@ -13,6 +13,7 @@ public class Boss_Run : StateMachineBehaviour
     Transform player;
     Rigidbody2D rb;
     Boss boss;
+    BossHealth health;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -20,7 +21,7 @@ public class Boss_Run : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody2D>();
         boss = animator.GetComponent<Boss>();
-
+        health = animator.GetComponent<BossHealth>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -42,6 +43,11 @@ public class Boss_Run : StateMachineBehaviour
         {
             animator.SetTrigger("DashAttack");
         }
+
+        //if(health.posture >= 100)
+        //{
+        //    health.PostureBroken();
+        //}
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -50,5 +56,20 @@ public class Boss_Run : StateMachineBehaviour
         animator.ResetTrigger("Attack");
         animator.ResetTrigger("DashAttack");
     }
+    
+    //public void PostureBroken(Animator animator)
+    //{
+    //    health.postureBar.SetPosture(100);
+    //    animator.SetBool("Stun", true);
+
+    //}
+
+    //public void PostureNotBroken(Animator animator)
+    //{
+    //    health.postureBar.SetPosture(0);
+    //    health.posture = 0;
+    //    animator.SetBool("Stun", false);
+
+    //}
 
 }
