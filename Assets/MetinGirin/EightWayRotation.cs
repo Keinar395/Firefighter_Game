@@ -25,14 +25,15 @@ public class Eightway : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
 
 
-        if (moveInput.x > 0) // Saða gidiyorsa
+        if (moveInput.x > 0)
         {
-            weaponTransform.localScale = new Vector3(0.5f, 0.5f, 1); // Silahý düz tut
+            weaponTransform.localEulerAngles = new Vector3(0, 0, 0); // Normal yön
         }
-        else if (moveInput.x < 0) // Sola gidiyorsa
+        else if (moveInput.x < 0)
         {
-            weaponTransform.localScale = new Vector3(0.5f, -0.5f, 1); // Silahý ters çevir
+            weaponTransform.localEulerAngles = new Vector3(0, 180, 0); // Y ekseninde çevir
         }
+
 
 
     }
@@ -40,5 +41,5 @@ public class Eightway : MonoBehaviour
 
 
 
-    
+
 }

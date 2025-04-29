@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     private int dieTime = 2;
 
     public HealthBar healthBar;
+    public Animator animator;
 
     private float speed = 7f;
     private float jumpingPower = 20f;
@@ -55,6 +56,8 @@ public class Movement : MonoBehaviour
 
 
         movement = Input.GetAxisRaw("Horizontal");
+
+        animator.SetFloat("Speed", Mathf.Abs(movement));
 
         Flip();
 
