@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bullet : MonoBehaviour
+public class HeroBullet : MonoBehaviour
 {
     Rigidbody2D rb;
-    public float bulletspeed = 20;
+    public float bulletspeed = 30;
     public float endTime = 2;
 
     // Start is called before the first frame update
@@ -19,20 +19,24 @@ public class bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Enemy enemy = collision.GetComponent<Enemy>();
 
-        Movement player = collision.GetComponent<Movement>();
+        BossHealth boss = collision.GetComponent<BossHealth>();
 
-
-        if (player != null)
+        if (enemy != null)
         {
-            player.Hitted(80);
+            enemy.TakeDamage(20, 40, transform.position);
+        }
 
+        if (boss != null)
+        {
+            boss.TakeDamage(20, 40);
         }
 
         Destroy(gameObject);

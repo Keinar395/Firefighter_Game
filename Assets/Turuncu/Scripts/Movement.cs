@@ -14,8 +14,8 @@ public class Movement : MonoBehaviour
     public HealthBar healthBar;
     public Animator animator;
 
-    private float speed = 7f;
-    private float jumpingPower = 20f;
+    private float speed = 14f;
+    private float jumpingPower = 25f;
     private bool doubleJump;
 
     private bool canDash = true;

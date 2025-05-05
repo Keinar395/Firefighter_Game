@@ -1,45 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Eightway : MonoBehaviour
 {
-    private float rotationSpeed = 7f; // Dönme hýzý
+    public Transform weaponTransform; // Silahýn dönüþü için
+    public Transform handsTransform;  // Ellerin dönüþü için
+    public float rotationSpeed = 7f;
+
     private Vector2 moveInput;
-    public Transform weaponTransform;
+    private float currentAngle; // Þu anki açýyý sakla (Lerp için)
 
     void Update()
     {
-        // **1. Input Alma (Klavye ve Gamepad)**
-        moveInput.x = Input.GetAxisRaw("Horizontal"); // A (-1) ve D (+1) veya Gamepad X Ekseni
-        moveInput.y = Input.GetAxisRaw("Vertical");   // W (+1) ve S (-1) veya Gamepad Y Ekseni
+        moveInput.x = Input.GetAxisRaw("Horizontal");
+        moveInput.y = Input.GetAxisRaw("Vertical");
 
-        // **2. Eðer input sýfýr deðilse karakteri döndür**
         if (moveInput.sqrMagnitude > 0.1f)
         {
-            float targetAngle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg; // Yönü açýya çevir
-            Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle); // Yeni dönüþ açýsýný oluþtur
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            float targetAngle = Mathf.Atan2(moveInput.y, moveInput.x) * Mathf.Rad2Deg;
+
+            // SADECE Z ekseninde Lerp'li dönüþ (X ve Y rotasyonu 0)
+            currentAngle = Mathf.LerpAngle(currentAngle, targetAngle, Time.deltaTime * rotationSpeed);
+            transform.rotation = Quaternion.Euler(0, 0, currentAngle);
+
+            // Karakterin Z pozisyonunu sabitle (2D'de derinlik sorunu olmasýn)
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+
+            // Sola mý bakýyor? (90°'den fazla veya -90°'den az)
+            bool isFacingLeft = Mathf.Abs(currentAngle) > 90f;
+
+            // Silah ve elleri ters çevir (Y ekseninde flip)
+            if (isFacingLeft)
+            {
+                weaponTransform.localScale = new Vector3(1, 1, 1);
+                handsTransform.localScale = new Vector3(1, -1, 1);
+            }
+            else
+            {
+                weaponTransform.localScale = Vector3.one;
+                handsTransform.localScale = Vector3.one;
+            }
         }
-
-        transform.rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z);
-
-
-        if (moveInput.x > 0)
-        {
-            weaponTransform.localEulerAngles = new Vector3(0, 0, 0); // Normal yön
-        }
-        else if (moveInput.x < 0)
-        {
-            weaponTransform.localEulerAngles = new Vector3(0, 180, 0); // Y ekseninde çevir
-        }
-
-
-
     }
-
-
-
-
-
 }
