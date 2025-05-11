@@ -9,6 +9,8 @@ public class Boss : MonoBehaviour
 
     public bool isFlipped = false;
 
+     
+
     //private Animator anim;
     //private Rigidbody2D rb;
 
@@ -25,7 +27,7 @@ public class Boss : MonoBehaviour
     //    float facingDirection = Mathf.Sign(player.position.x - transform.position.x);
     //    transform.localScale = new Vector3(facingDirection * -1.7071f, 1.7071f, 1.7071f);
 
-        
+
     //}
     public void LookAtPlayer()
     {

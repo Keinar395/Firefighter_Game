@@ -21,6 +21,9 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private float knockbackForce = 5f;
     [SerializeField] private float knockbackDuration = 0.2f; // Knockback süresi
+    
+    private AudioSource src;
+    [SerializeField] private AudioClip ehurt, edie, posturebroken;
 
     public HealthBar healthBar;
     public PostureBar postureBar;
@@ -39,6 +42,7 @@ public class Enemy : MonoBehaviour
         postureBar.SetMaxPosture(100);
         postureBar.SetPosture(0);
         //currentPoint = pointB.transform;
+        src = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -109,6 +113,9 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
         posture += pdamage;
 
+        src.clip = ehurt;
+        src.Play();
+
         healthBar.SetHealth(currentHealth);
         postureBar.AddPosture(pdamage);
         
@@ -139,6 +146,8 @@ public class Enemy : MonoBehaviour
         chaseSpeed = 0;
         enemyWeapon.SetActive(false);
         isKnockedBack = true;
+        src.clip = posturebroken;
+        src.Play();
     }
 
     public void PostureNotBroken()
@@ -178,6 +187,8 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, enmyDieTime);
         GetComponent<Collider2D>().enabled = false;
         ScoreScript.scoreValue += 1;
+        src.clip = edie;
+        src.Play();
     }
 
     private void Flip()

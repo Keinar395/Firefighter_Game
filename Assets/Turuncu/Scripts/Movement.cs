@@ -31,6 +31,9 @@ public class Movement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform hands;
 
+    private AudioSource src;
+    [SerializeField] private AudioClip jump, dash, hurt, die;
+
     private float movement;
 
 
@@ -44,6 +47,7 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        src = GetComponent<AudioSource>();
 
     }
     //movement kodlarý aaabisi
@@ -81,6 +85,8 @@ public class Movement : MonoBehaviour
         if (IsGrounded() && Input.GetButtonDown("Jump"))
         {
             doubleJump = false;
+            src.clip = jump;
+            src.Play();
         }
  
         
@@ -133,7 +139,8 @@ public class Movement : MonoBehaviour
             isDashing = false;
             yield return new WaitForSeconds(dashingCooldown);
             canDash = true;
-
+            src.clip = dash;
+            src.Play();
         }
 
 
@@ -168,6 +175,8 @@ public class Movement : MonoBehaviour
         currentHealth -= damage;
 
         healthBar.SetHealth(currentHealth);
+        src.clip = hurt;
+        src.Play();
 
         if (currentHealth <= 0)
         {
@@ -181,6 +190,8 @@ public class Movement : MonoBehaviour
         
         //ölüm animasyonu ve sesi buraya eklenecek 
         Destroy(gameObject, dieTime);
+        src.clip = die;
+        src.Play();
     }
 
 

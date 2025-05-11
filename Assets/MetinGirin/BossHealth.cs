@@ -10,7 +10,8 @@ public class BossHealth : MonoBehaviour
 
     public Animator animator;
 
-    
+    [SerializeField] private AudioSource src;
+    [SerializeField] private AudioClip bhurt, bdie, posturebroken;
 
 
     public int health = 500;
@@ -27,6 +28,8 @@ public class BossHealth : MonoBehaviour
 
         Boss_Run boss_Run = GetComponent<Boss_Run>();
         animator = GetComponent<Animator>();
+        src = GetComponent<AudioSource>();
+
     }
 
     public void TakeDamage(int damage, int pdamage)
@@ -36,6 +39,19 @@ public class BossHealth : MonoBehaviour
 
         currentHealth -= damage;
         posture += pdamage;
+
+        if (src == null)
+        {
+            Debug.LogError("AudioSource yok!");
+        }
+
+        if (bhurt == null)
+        {
+            Debug.LogError("bhurt sesi atanmadý!");
+        }
+
+        src.clip = bhurt;
+        src.Play();
 
         healthBar.SetHealth(currentHealth);
         postureBar.AddPosture(pdamage);
@@ -56,7 +72,9 @@ public class BossHealth : MonoBehaviour
     {
         postureBar.SetPosture(500);
         animator.SetBool("Stun", true);
-        
+        src.clip = posturebroken;
+        src.Play();
+
     }
 
     public void PostureNotBroken()
@@ -70,6 +88,8 @@ public class BossHealth : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
+        src.clip = bdie;
+        src.Play();
     }
 
 }

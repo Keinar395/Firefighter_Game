@@ -29,6 +29,8 @@ public class HeroBullet : MonoBehaviour
 
         BossHealth boss = collision.GetComponent<BossHealth>();
 
+        Debug.Log("Çarpýlan obje: " + collision.gameObject.name);
+
         if (enemy != null)
         {
             enemy.TakeDamage(20, 40, transform.position);
