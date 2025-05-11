@@ -10,12 +10,13 @@ public class EnemyWeapon : MonoBehaviour
     public Enemy enemy;
 
     private float shotCooldown;
-    private float startShotCooldown = 1f;
+    private float startShotCooldown = 3f;
     private float distance = 25f;
     void Start()
     {
         shotCooldown = startShotCooldown;
         enemy = FindObjectOfType<Enemy>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
 
     }
 

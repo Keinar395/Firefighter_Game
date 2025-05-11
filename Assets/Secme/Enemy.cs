@@ -6,8 +6,8 @@ public class Enemy : MonoBehaviour
 {
     public bool isRanged = false;
 
-    public GameObject pointA;
-    public GameObject pointB;
+    //public GameObject pointA;
+    //public GameObject pointB;
     private float speed = 3f;
     private float chaseSpeed = 4f;
     private Rigidbody2D rb;
@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
 
     public Transform player;
     public bool isChasing;
-    private float distance = 10f;
+    private float distance = 1000f;
 
     private bool isKnockedBack = false; // Knockback sýrasýnda kontrolü durdurmak için
 
@@ -33,11 +33,12 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        currentHealth = maxHealth;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyWeapon = transform.Find("EHands").gameObject; currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         postureBar.SetMaxPosture(100);
         postureBar.SetPosture(0);
-        currentPoint = pointB.transform;
+        //currentPoint = pointB.transform;
     }
 
     void Update()
@@ -72,24 +73,24 @@ public class Enemy : MonoBehaviour
             }
 
 
-            if (currentPoint == pointB.transform)
-            {
-                rb.velocity = new Vector2(speed, 0);
-            }
-            else
-            {
-                rb.velocity = new Vector2(-speed, 0);
-            }
+            //if (currentPoint == pointB.transform)
+            //{
+            //    rb.velocity = new Vector2(speed, 0);
+            //}
+            //else
+            //{
+            //    rb.velocity = new Vector2(-speed, 0);
+            //}
 
-            if (Vector2.Distance(transform.position, currentPoint.position) < 1f && currentPoint == pointB.transform)
-            {
-                currentPoint = pointA.transform;
-            }
+            //if (Vector2.Distance(transform.position, currentPoint.position) < 1f && currentPoint == pointB.transform)
+            //{
+            //    currentPoint = pointA.transform;
+            //}
 
-            if (Vector2.Distance(transform.position, currentPoint.position) < 1f && currentPoint == pointA.transform)
-            {
-                currentPoint = pointB.transform;
-            }
+            //if (Vector2.Distance(transform.position, currentPoint.position) < 1f && currentPoint == pointA.transform)
+            //{
+            //    currentPoint = pointB.transform;
+            //}
         }
 
 
@@ -175,16 +176,19 @@ public class Enemy : MonoBehaviour
         chaseSpeed = 0;
         //ölüm animasyonu ve sesi buraya eklenecek 
         Destroy(gameObject, enmyDieTime);
+        GetComponent<Collider2D>().enabled = false;
+        ScoreScript.scoreValue += 1;
     }
 
     private void Flip()
     {
-    
-        if (currentPoint == pointB.transform || transform.position.x < player.position.x)
+        //currentPoint == pointB.transform ||
+        //currentPoint == pointA.transform ||
+        if ( transform.position.x < player.position.x)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0); // Saða bak
         }
-        else if (currentPoint == pointA.transform || transform.position.x > player.position.x)
+        else if (transform.position.x > player.position.x)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0); // Sola bak
         }

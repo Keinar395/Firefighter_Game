@@ -173,6 +173,7 @@ MonoBehaviour:
   knockbackDuration: 0.2
   healthBar: {fileID: 3058746066030590654}
   postureBar: {fileID: 4667303225592505612}
+  enemyWeapon: {fileID: 0}
   maxHealth: 900
   enmyDieTime: 1
   posture: 0
@@ -684,7 +685,7 @@ GameObject:
   - component: {fileID: 6530147997892835733}
   m_Layer: 6
   m_Name: EHands
-  m_TagString: Untagged
+  m_TagString: EnemyWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -22,7 +22,7 @@ public class BossHealth : MonoBehaviour
     {
         currentHealth = health;
         healthBar.SetMaxHealth(health);
-        postureBar.SetMaxPosture(100);
+        postureBar.SetMaxPosture(500);
         postureBar.SetPosture(0);
 
         Boss_Run boss_Run = GetComponent<Boss_Run>();
@@ -45,7 +45,7 @@ public class BossHealth : MonoBehaviour
             Die();
         }
 
-        if (posture >= 100)
+        if (posture >= 500)
         {
             Invoke("PostureBroken", 0.5f);
             Invoke("PostureNotBroken", 5);
@@ -54,7 +54,7 @@ public class BossHealth : MonoBehaviour
 
     public void PostureBroken()
     {
-        postureBar.SetPosture(100);
+        postureBar.SetPosture(500);
         animator.SetBool("Stun", true);
         
     }
