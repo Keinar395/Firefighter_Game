@@ -569,6 +569,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 860790694}
+    - target: {fileID: 4380293685729774620, guid: d62a6a57f2ac6cb48988f4dc8322a36a, type: 3}
+      propertyPath: lastfire
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6780226111747408712, guid: d62a6a57f2ac6cb48988f4dc8322a36a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.6

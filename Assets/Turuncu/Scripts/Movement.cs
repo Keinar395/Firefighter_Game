@@ -44,7 +44,7 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
- 
+
     }
     //movement kodlarý aaabisi
     void Update()
@@ -68,6 +68,8 @@ public class Movement : MonoBehaviour
             rb.velocity = new Vector2(movement * speed, rb.velocity.y);
         }
     }
+
+
 
     public void Stop()
     {

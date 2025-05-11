@@ -21,5 +21,8 @@ public class weapon : MonoBehaviour
     public void shoot()
     {
         Instantiate(bullet,weapoon.position,weapoon.rotation);
+
+        Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), bullet.GetComponent<Collider2D>());
+
     }
 }

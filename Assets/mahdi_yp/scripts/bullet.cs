@@ -14,6 +14,8 @@ public class bullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * bulletspeed;
         Destroy(gameObject, endTime);
+
+
     }
 
     // Update is called once per frame
@@ -34,6 +36,8 @@ public class bullet : MonoBehaviour
             player.Hitted(80);
 
         }
+
+        Debug.Log("Mermi þuna çarptý: " + collision.gameObject.name);
 
         Destroy(gameObject);
     }
