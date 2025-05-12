@@ -64,9 +64,9 @@ public class Movement : MonoBehaviour
 
         Flip();
 
-        
+        Invoke("ResetT", 5f);
 
-        if(OtherMovement.Instance.StopControl())
+        if (OtherMovement.Instance.StopControl())
         {
             rb.velocity = new Vector2(movement * speed, rb.velocity.y);
         }
@@ -142,6 +142,7 @@ public class Movement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0); // Sola bak
         }
 
+        
     }
 
     private IEnumerator Dash()
@@ -215,6 +216,9 @@ public class Movement : MonoBehaviour
     }
 
 
-
+    public void ResetT()
+    {
+        animator.SetBool("Attack", false);
+    }
 
 }

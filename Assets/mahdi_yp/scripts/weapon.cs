@@ -37,5 +37,7 @@ public class weapon : MonoBehaviour
 
         Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), bullet.GetComponent<Collider2D>());
 
+        
+
     }
 }

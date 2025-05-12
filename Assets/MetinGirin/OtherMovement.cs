@@ -43,6 +43,7 @@ public class OtherMovement : MonoBehaviour
         if (context.ReadValueAsButton())
         {
             MeleeCombat.Instance.Attack();
+            Movement.Instance.animator.SetBool("Attack", true);
         }
     }
 
