@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Movement : MonoBehaviour
 {
     public static Movement Instance { get; private set; }
 
-    private int maxHealth = 1000;
+    private int maxHealth = 3000;
     private int currentHealth;
     private int dieTime = 2;
 
@@ -30,6 +31,7 @@ public class Movement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform hands;
+    
 
     private AudioSource src;
     [SerializeField] private AudioClip jump, dash, hurt, die;
@@ -47,6 +49,8 @@ public class Movement : MonoBehaviour
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
         src = GetComponent<AudioSource>();
+        
+
 
     }
     //movement kodlarý aaabisi
@@ -81,6 +85,16 @@ public class Movement : MonoBehaviour
         //{
         //    animator.SetBool("isJumping", false);
         //}
+
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            CommitSuicide();
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            RR();
+        }
 
     }
 
@@ -205,6 +219,18 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public void CommitSuicide()
+    {
+        currentHealth = 0;
+        healthBar.SetHealth(currentHealth);
+        Die();
+    }
+
+    public void RR()
+    {
+        SceneManager.LoadScene("Demo");
+    }
+
     void Die()
     {
         Debug.Log("Öldün!");
@@ -213,6 +239,7 @@ public class Movement : MonoBehaviour
         Destroy(gameObject, dieTime);
         src.clip = die;
         src.Play();
+        FindObjectOfType<GameOverUI>().ShowLose();
     }
 
 
@@ -220,5 +247,7 @@ public class Movement : MonoBehaviour
     {
         animator.SetBool("Attack", false);
     }
+
+    
 
 }

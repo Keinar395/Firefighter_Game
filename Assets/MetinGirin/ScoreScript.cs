@@ -9,6 +9,8 @@ public class ScoreScript : MonoBehaviour
 {
     public static int scoreValue = 0;
     TMP_Text score;
+
+    public bool isEndless = false;
     void Start()
     {
         score = GetComponent<TMP_Text>();
@@ -18,7 +20,7 @@ public class ScoreScript : MonoBehaviour
     void Update()
     {
         score.text = "Score: " + scoreValue;
-        if (scoreValue >= 15)
+        if (scoreValue >= 10 && isEndless == false)
         {
             SceneManager.LoadScene("BossDemo");
         }

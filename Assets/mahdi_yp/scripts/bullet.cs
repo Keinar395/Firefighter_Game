@@ -33,7 +33,7 @@ public class bullet : MonoBehaviour
 
         if (player != null)
         {
-            player.Hitted(80);
+            player.Hitted(120);
 
         }
 

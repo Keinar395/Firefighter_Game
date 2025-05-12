@@ -9,8 +9,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private GameObject eenemyPrefab;
 
-    private float spawnTime = 5f; // Time between spawns
-    private float sspawnTime = 7f; 
+    private float spawnTime = 7f; // Time between spawns
+    private float sspawnTime = 10f; 
     void Start()
     {
         StartCoroutine(SpawnEnemy(spawnTime, enemyPrefab));

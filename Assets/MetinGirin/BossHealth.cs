@@ -14,7 +14,7 @@ public class BossHealth : MonoBehaviour
     [SerializeField] private AudioClip bhurt, bdie, posturebroken;
 
 
-    public int health = 50000;
+    public int health = 40000;
     int currentHealth;
     public int posture = 0;
     public bool isInvulnerable = false;
@@ -29,6 +29,8 @@ public class BossHealth : MonoBehaviour
         Boss_Run boss_Run = GetComponent<Boss_Run>();
         animator = GetComponent<Animator>();
         src = GetComponent<AudioSource>();
+
+        
 
     }
 
@@ -90,6 +92,7 @@ public class BossHealth : MonoBehaviour
         Destroy(gameObject);
         src.clip = bdie;
         src.Play();
+        FindObjectOfType<GameOverUI>().ShowWin();
     }
 
 }

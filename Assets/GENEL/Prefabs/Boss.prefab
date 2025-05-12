@@ -107,7 +107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1009834232163165120
 Transform:
   m_ObjectHideFlags: 0
@@ -292,7 +292,7 @@ MonoBehaviour:
   bhurt: {fileID: 8300000, guid: 220011a20a6f8a749bd9cdd624073ada, type: 3}
   bdie: {fileID: 8300000, guid: 3106e980e6bcee44bb1cfb8c4049d915, type: 3}
   posturebroken: {fileID: 8300000, guid: d2c95b38b16ed97468bebea9c32745c3, type: 3}
-  health: 10000
+  health: 6500
   posture: 0
   isInvulnerable: 0
 --- !u!114 &8605764348505136935
@@ -307,8 +307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42a11a8560b13748a9dd4b540505438, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 300
-  enragedAttackDamage: 400
+  attackDamage: 299
+  enragedAttackDamage: 499
   attackOffset: {x: 0, y: 0, z: 0}
   attackRange: 4
   attackMask:

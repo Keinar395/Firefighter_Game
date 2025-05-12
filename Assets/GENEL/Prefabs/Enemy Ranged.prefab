@@ -123,8 +123,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: 0.14722142, y: -0.15011607}
+  m_Size: {x: 0.8809716, y: 2.1119995}
   m_Direction: 0
 --- !u!50 &5741995814054882776
 Rigidbody2D:
@@ -189,6 +189,7 @@ MonoBehaviour:
   isRanged: 1
   player: {fileID: 0}
   isChasing: 0
+  myPanel: {fileID: 0}
   knockbackForce: 15
   knockbackDuration: 0.2
   ehurt: {fileID: 8300000, guid: 596c52de9be0e5a43a636f303b696449, type: 3}

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class Enemy : MonoBehaviour
     public Transform player;
     public bool isChasing;
     private float distance = 1000f;
+
+    public GameObject myPanel;
 
     private bool isKnockedBack = false; // Knockback sýrasýnda kontrolü durdurmak için
 
@@ -43,6 +46,7 @@ public class Enemy : MonoBehaviour
         postureBar.SetPosture(0);
         //currentPoint = pointB.transform;
         src = GetComponent<AudioSource>();
+        myPanel = GameObject.Find("Blink");
     }
 
     void Update()
@@ -112,6 +116,10 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= damage;
         posture += pdamage;
+
+        Invoke("Blink", 0.1f);
+        Invoke("UnBlink", 0f);
+
 
         src.clip = ehurt;
         src.Play();
@@ -217,5 +225,15 @@ public class Enemy : MonoBehaviour
                 player.Hitted(100);
             }
         }
+    }
+
+    public void Blink()
+    {
+        myPanel.SetActive(true);
+    }
+
+    public void UnBlink()
+    {
+        myPanel.SetActive(false);
     }
 }
