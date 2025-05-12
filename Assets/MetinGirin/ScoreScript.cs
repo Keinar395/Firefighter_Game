@@ -18,7 +18,7 @@ public class ScoreScript : MonoBehaviour
     void Update()
     {
         score.text = "Score: " + scoreValue;
-        if (scoreValue >= 1)
+        if (scoreValue >= 15)
         {
             SceneManager.LoadScene("BossDemo");
         }

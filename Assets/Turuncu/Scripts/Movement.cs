@@ -36,7 +36,6 @@ public class Movement : MonoBehaviour
 
     private float movement;
 
-
     private void Awake()
     {
         Instance = this;
@@ -71,6 +70,18 @@ public class Movement : MonoBehaviour
         {
             rb.velocity = new Vector2(movement * speed, rb.velocity.y);
         }
+
+        //if (Input.GetButtonDown("Jump"))
+        //{
+        //    animator.SetBool("isJumping", true);
+        //    Debug.Log("Zýplama animasyonu tetiklendi!");
+        //}
+
+        //if (IsGrounded())
+        //{
+        //    animator.SetBool("isJumping", false);
+        //}
+
     }
 
 
@@ -84,9 +95,11 @@ public class Movement : MonoBehaviour
     {
         if (IsGrounded() && Input.GetButtonDown("Jump"))
         {
+            Debug.Log("Zýplama baþladý!");
             doubleJump = false;
             src.clip = jump;
             src.Play();
+            animator.SetBool("isJumping", true);
         }
  
         
@@ -94,6 +107,13 @@ public class Movement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
             doubleJump = !doubleJump;
+            
+        }
+
+        if(IsGrounded())
+        {
+            Debug.Log("Yere deðdi!");
+            animator.SetBool("isJumping", false);
         }
 
     }
@@ -103,7 +123,7 @@ public class Movement : MonoBehaviour
     // yere deðme kontrolü
     private bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.05f, groundLayer);
 
     }
 

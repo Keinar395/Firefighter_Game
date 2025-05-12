@@ -14,7 +14,7 @@ public class BossHealth : MonoBehaviour
     [SerializeField] private AudioClip bhurt, bdie, posturebroken;
 
 
-    public int health = 500;
+    public int health = 50000;
     int currentHealth;
     public int posture = 0;
     public bool isInvulnerable = false;
@@ -23,7 +23,7 @@ public class BossHealth : MonoBehaviour
     {
         currentHealth = health;
         healthBar.SetMaxHealth(health);
-        postureBar.SetMaxPosture(500);
+        postureBar.SetMaxPosture(5000);
         postureBar.SetPosture(0);
 
         Boss_Run boss_Run = GetComponent<Boss_Run>();
@@ -61,7 +61,7 @@ public class BossHealth : MonoBehaviour
             Die();
         }
 
-        if (posture >= 500)
+        if (posture >= 5000)
         {
             Invoke("PostureBroken", 0.5f);
             Invoke("PostureNotBroken", 5);
@@ -70,7 +70,7 @@ public class BossHealth : MonoBehaviour
 
     public void PostureBroken()
     {
-        postureBar.SetPosture(500);
+        postureBar.SetPosture(5000);
         animator.SetBool("Stun", true);
         src.clip = posturebroken;
         src.Play();
