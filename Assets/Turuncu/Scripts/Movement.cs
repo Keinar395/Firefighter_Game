@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class Movement : MonoBehaviour
 {
@@ -31,7 +32,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform hands;
-    
+
+    public GameObject blinkPanel;
 
     private AudioSource src;
     [SerializeField] private AudioClip jump, dash, hurt, die;
@@ -217,6 +219,9 @@ public class Movement : MonoBehaviour
         {
             Die();
         }
+
+        Invoke("Blink", 0f);
+        Invoke("UnBlink", 0.1f);
     }
 
     public void CommitSuicide()
@@ -248,6 +253,15 @@ public class Movement : MonoBehaviour
         animator.SetBool("Attack", false);
     }
 
-    
+    public void Blink()
+    {
+        blinkPanel.SetActive(true);
+    }
+
+    public void UnBlink()
+    {
+        blinkPanel.SetActive(false);
+    }
+
 
 }

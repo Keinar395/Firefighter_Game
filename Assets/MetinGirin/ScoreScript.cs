@@ -20,7 +20,7 @@ public class ScoreScript : MonoBehaviour
     void Update()
     {
         score.text = "Score: " + scoreValue;
-        if (scoreValue >= 1 && isEndless == false)
+        if (scoreValue >= 10 && isEndless == false)
         {
             SceneManager.LoadScene("BossDemo");
         }

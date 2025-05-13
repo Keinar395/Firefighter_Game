@@ -18,8 +18,6 @@ public class Enemy : MonoBehaviour
     public bool isChasing;
     private float distance = 1000f;
 
-    public GameObject myPanel;
-
     private bool isKnockedBack = false; // Knockback sýrasýnda kontrolü durdurmak için
 
     [SerializeField] private float knockbackForce = 5f;
@@ -46,7 +44,6 @@ public class Enemy : MonoBehaviour
         postureBar.SetPosture(0);
         //currentPoint = pointB.transform;
         src = GetComponent<AudioSource>();
-        myPanel = GameObject.Find("Blink");
     }
 
     void Update()
@@ -227,13 +224,5 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Blink()
-    {
-        myPanel.SetActive(true);
-    }
-
-    public void UnBlink()
-    {
-        myPanel.SetActive(false);
-    }
+    
 }
