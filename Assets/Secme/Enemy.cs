@@ -7,8 +7,8 @@ public class Enemy : MonoBehaviour
 {
     public bool isRanged = false;
 
-    //public GameObject pointA;
-    //public GameObject pointB;
+    public GameObject pointA;
+    public GameObject pointB;
     private float speed = 3f;
     private float chaseSpeed = 4f;
     private Rigidbody2D rb;
@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
 
     public Transform player;
     public bool isChasing;
-    private float distance = 1000f;
+    private float distance = 10f;
 
     private bool isKnockedBack = false; // Knockback sýrasýnda kontrolü durdurmak için
 
@@ -42,72 +42,47 @@ public class Enemy : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
         postureBar.SetMaxPosture(100);
         postureBar.SetPosture(0);
-        //currentPoint = pointB.transform;
+        currentPoint = pointB.transform;
         src = GetComponent<AudioSource>();
     }
 
     void Update()
     {
+        if (isKnockedBack) return; // Knockback sýrasýnda hiçbir þey yapmasýn
+
         if (isChasing)
         {
-            if (transform.position.x > player.position.x)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-                transform.position += Vector3.left * chaseSpeed * Time.deltaTime;
-            }
-
-            if (transform.position.x < player.position.x)
-            {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-                transform.position += Vector3.right * chaseSpeed * Time.deltaTime;
-            }
+            Vector3 direction = (player.position - transform.position).normalized;
+            rb.velocity = new Vector2(direction.x * chaseSpeed, rb.velocity.y);
         }
         else
         {
             if (Vector2.Distance(transform.position, player.position) < distance)
             {
-                if(isRanged)
-                {
+                if (isRanged)
                     speed = 0;
-                }
                 else
-                {
                     isChasing = true;
-                }
-                
             }
 
+            if (currentPoint == pointB.transform)
+            {
+                rb.velocity = new Vector2(speed, 0);
+            }
+            else
+            {
+                rb.velocity = new Vector2(-speed, 0);
+            }
 
-            //if (currentPoint == pointB.transform)
-            //{
-            //    rb.velocity = new Vector2(speed, 0);
-            //}
-            //else
-            //{
-            //    rb.velocity = new Vector2(-speed, 0);
-            //}
-
-            //if (Vector2.Distance(transform.position, currentPoint.position) < 1f && currentPoint == pointB.transform)
-            //{
-            //    currentPoint = pointA.transform;
-            //}
-
-            //if (Vector2.Distance(transform.position, currentPoint.position) < 1f && currentPoint == pointA.transform)
-            //{
-            //    currentPoint = pointB.transform;
-            //}
+            if (Vector2.Distance(transform.position, currentPoint.position) < 1f)
+            {
+                currentPoint = (currentPoint == pointB.transform) ? pointA.transform : pointB.transform;
+            }
         }
-
-
-
-
-
-
-
-
 
         Flip();
     }
+
 
     public void TakeDamage(int damage, int pdamage, Vector2 attackPosition)
     {
@@ -198,18 +173,22 @@ public class Enemy : MonoBehaviour
 
     private void Flip()
     {
-        //currentPoint == pointB.transform ||
-        //currentPoint == pointA.transform ||
-        if ( transform.position.x < player.position.x)
+        if (isChasing)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0); // Saða bak
+            if (player.position.x > transform.position.x)
+                transform.rotation = Quaternion.Euler(0, 180, 0); // Saða bak
+            else
+                transform.rotation = Quaternion.Euler(0, 0, 0);   // Sola bak
         }
-        else if (transform.position.x > player.position.x)
+        else
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0); // Sola bak
+            if (currentPoint == pointB.transform)
+                transform.rotation = Quaternion.Euler(0, 180, 0); // Saða bak
+            else
+                transform.rotation = Quaternion.Euler(0, 0, 0);   // Sola bak
         }
-
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
