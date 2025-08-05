@@ -17,6 +17,7 @@ public class BossHealth : MonoBehaviour
     public int health = 40000;
     int currentHealth;
     public int posture = 0;
+    public int postureFlag = 0;
     public bool isInvulnerable = false;
 
     void Start()
@@ -72,15 +73,21 @@ public class BossHealth : MonoBehaviour
 
     public void PostureBroken()
     {
+        postureFlag++;
         postureBar.SetPosture(5000);
         animator.SetBool("Stun", true);
         src.clip = posturebroken;
-        src.Play();
+        if(postureFlag == 1)
+        {
+            src.Play();
+        }
+        
 
     }
 
     public void PostureNotBroken()
     {
+        postureFlag = 0;
         postureBar.SetPosture(0);
         posture = 0;
         animator.SetBool("Stun", false);  

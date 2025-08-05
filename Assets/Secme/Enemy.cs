@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
     public int enmyDieTime = 3;
     int currentHealth;
     public int posture = 0;
+    public int postureFlag = 0;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -121,17 +122,24 @@ public class Enemy : MonoBehaviour
 
     public void PostureBroken()
     {
+        postureFlag++;
         postureBar.SetPosture(100);
         speed = 0;
         chaseSpeed = 0;
         enemyWeapon.SetActive(false);
         isKnockedBack = true;
         src.clip = posturebroken;
-        src.Play();
+        if(postureFlag == 1)
+        {
+            src.Play();
+        }
+            
+        
     }
 
     public void PostureNotBroken()
     {
+        postureFlag = 0;
         postureBar.SetPosture(0);
         posture = 0;
         speed = 3f;

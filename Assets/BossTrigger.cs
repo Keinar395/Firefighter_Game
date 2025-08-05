@@ -11,6 +11,12 @@ public class CameraAnchorCinemachine : MonoBehaviour
 
     public float triggerDistance = 15f;
 
+    [Header("Müzik Ayarlarý")]
+    public AudioSource musicSource;        // Canvas içindeki AudioSource
+    public AudioClip bossMusicClip;        // Boss müziði
+
+    private bool bossTriggered = false;    // Müziði sadece bir kez deðiþtirmek için
+
     private void Start()
     {
         BossHealth.SetActive(false);
@@ -20,27 +26,37 @@ public class CameraAnchorCinemachine : MonoBehaviour
 
     void Update()
     {
-        // Boss'a olan mesafeyi hesapla
         float distance = Vector3.Distance(player.position, transform.position);
 
-        // Eðer boss'a yaklaþýrsak, kamerayý sabitlemek için offset'i deðiþtirelim
         if (distance < triggerDistance)
         {
-            // Kamerayý sabitlemek için m_FollowOffset deðerini deðiþtiriyoruz
             bossVirtualCam.Priority = 100;
             BossHealth.SetActive(true);
             BossPosture.SetActive(true);
             Boss.SetActive(true);
+
+            if (!bossTriggered)
+            {
+                // Müzik deðiþimi
+                if (musicSource != null && bossMusicClip != null)
+                {
+                    musicSource.clip = bossMusicClip;
+                    musicSource.Play();
+                }
+
+                bossTriggered = true; // Bir kez tetiklenmesini saðlýyoruz
+            }
         }
         else
         {
-            // Eðer boss'tan uzaklaþýrsak, sabitlemeyi kaldýrýyoruz
-            bossVirtualCam.Priority = 0;  // Varsayýlan takip mesafesi
+            bossVirtualCam.Priority = 0;
             BossHealth.SetActive(false);
             BossPosture.SetActive(false);
 
+            // Eðer istersen müziði burada da eski haline çevirebilirsin
         }
     }
+}
 
 
     //void OnTriggerEnter2D(Collider2D other)
@@ -58,4 +74,4 @@ public class CameraAnchorCinemachine : MonoBehaviour
     //        bossVirtualCam.Priority = 0; // Eski kameraya dön
     //    }
     //}
-}
+
