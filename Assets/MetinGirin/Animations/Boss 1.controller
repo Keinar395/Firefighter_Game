@@ -22,7 +22,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &-7716308574459860593
+--- !u!114 &-6965252937049430331
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31,9 +31,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43fc3642d796b5247a11176fe9c8b458, type: 3}
+  m_Script: {fileID: 11500000, guid: 980e3df7e7368e345bb4eb697d3b27a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageRadius: 2
+  damageAmount: 20
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1102 &-6903464592567872766
 AnimatorState:
   serializedVersion: 6
@@ -47,7 +52,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: -8790470637937863288}
   m_StateMachineBehaviours:
-  - {fileID: -7716308574459860593}
+  - {fileID: -6965252937049430331}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

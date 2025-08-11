@@ -27,7 +27,8 @@ public class BossHealth : MonoBehaviour
         postureBar.SetMaxPosture(5000);
         postureBar.SetPosture(0);
 
-        Boss_Run boss_Run = GetComponent<Boss_Run>();
+        animator.GetBehaviour<Boss_Run>();
+
         animator = GetComponent<Animator>();
         src = GetComponent<AudioSource>();
 

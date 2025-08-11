@@ -49,4 +49,6 @@ MonoBehaviour:
   BossHealth: {fileID: 0}
   BossPosture: {fileID: 0}
   Boss: {fileID: 0}
-  triggerDistance: 20
+  triggerDistance: 30
+  musicSource: {fileID: 0}
+  bossMusicClip: {fileID: 8300000, guid: c73547d919c35b643a787ee4dc337bca, type: 3}
