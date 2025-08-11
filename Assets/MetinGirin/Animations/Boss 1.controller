@@ -333,8 +333,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2.5
   attackRange: 3
-  dashAttackRange: 7
-  dashAttackRange_: 7.5
+  dashAttackRange: 14
+  dashAttackRange_: 15
 --- !u!1101 &6467371742779395007
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
